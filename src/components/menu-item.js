@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const MenuItem = (props) => {
   return (
@@ -15,8 +15,21 @@ const MenuItem = (props) => {
           {props.itemDetail || "This is breif description of item number one,"}
         </Text>
       </View>
-      <View style={{}}>
-        <Text>plus</Text>
+      <View
+        style={{
+          // backgroundColor: "red",
+          position: "absolute",
+          right: 30,
+          bottom: 15,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            props.onSelect(props.id);
+          }}
+        >
+          <Text style={itemStyle.plusIcon}>+</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -54,5 +67,11 @@ const itemStyle = StyleSheet.create({
     margin: 10,
     flexDirection: "row",
     padding: 13,
+  },
+  plusIcon: {
+    color: "#D14D72",
+    fontSize: 40,
+    // position: "absolute",
+    // bottom: 0,
   },
 });

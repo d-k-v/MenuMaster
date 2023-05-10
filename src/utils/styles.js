@@ -6,6 +6,7 @@ export const globalStyle = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    // paddingTop: 60,
   },
   homeContainer: {
     flex: 1,

@@ -12,6 +12,7 @@ import { login } from "../utils/net";
 import { globalStyle } from "../utils/styles";
 import { ActivityIndicator } from "react-native-paper";
 import { ImageBackground } from "react-native-web";
+import { getValue, setValue } from "../utils/store";
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState("admin");
@@ -22,6 +23,13 @@ const Login = ({ navigation }) => {
   useEffect(() => {
     console.log("useEffect");
     setIsLoading(false);
+    getValue("login").then((isLoggedIn) => {
+      console.log("isLogged in", isLoggedIn);
+      if (isLoggedIn === "true") {
+        console.log("already logged in");
+        navigation.reset({ index: 0, routes: [{ name: "home" }] });
+      }
+    });
   }, []);
   console.log("ss");
   const handleLogin = () => {
@@ -32,6 +40,7 @@ const Login = ({ navigation }) => {
       .then((token) => {
         setIsLoading(false);
         // navigation.navigate("home");
+        setValue("login", "true");
         navigation.reset({ index: 0, routes: [{ name: "home" }] });
       })
       .catch((error) => {
